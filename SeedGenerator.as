@@ -6,6 +6,7 @@ class SeedGenerator {
 	/* This array should stay at 4 entities. You can assign any entities to it
 	 * but I recommend using script entities (the scrolls at the bottom of the 
 	 * entity menu). You must also declare your SeedGenerator with [text].
+	 * These entities MUST be close to where the player spawns.
 	 */
 	[entity] array<uint> encoders(4);
 	

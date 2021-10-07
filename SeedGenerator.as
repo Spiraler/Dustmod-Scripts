@@ -50,7 +50,7 @@ class SeedGenerator {
 	uint calculateSeed() {
 		uint guess = 0;
 		for (uint i = 0; i < encoders.size(); i++) {
-			uint theByte = uint32(floor(entity_by_id(encoders[i]).x() - encoderXs[i] - 300));
+			uint theByte = uint32(floor(entity_by_id(encoders[i]).x() - encoderXs[i] - 299.5));
 			guess += theByte * uint32(1 << (i*8));
 		}
 		puts("I think the seed was " + guess);

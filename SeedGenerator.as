@@ -20,7 +20,7 @@ class SeedGenerator {
 	 */
 	void locateEncoders() {
 		for (uint i = 0; i < encoders.size(); i++) {
-			encoderXs[i] = uint32(entity_by_id(encoders[i]).x());
+			encoderXs[i] = int(entity_by_id(encoders[i]).x());
 			entity_by_id(encoders[i]).x(encoderXs[i]);
 		}
 	}

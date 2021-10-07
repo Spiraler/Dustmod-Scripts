@@ -6,10 +6,11 @@ class SeedGenerator {
 	/* This array should stay at 4 entities. You can assign any entities to it
 	 * but I recommend using script entities (the scrolls at the bottom of the 
 	 * entity menu). You must also declare your SeedGenerator with [text].
+	 * These entities MUST be close to where the player spawns.
 	 */
 	[entity] array<uint> encoders(4);
 	
-	array<float> encoderXs(4);
+	array<int> encoderXs(4);
 	
 	SeedGenerator() {
 		@g = get_scene();
@@ -19,7 +20,8 @@ class SeedGenerator {
 	 */
 	void locateEncoders() {
 		for (uint i = 0; i < encoders.size(); i++) {
-			encoderXs[i] = entity_by_id(encoders[i]).x();
+			encoderXs[i] = uint32(entity_by_id(encoders[i]).x());
+			entity_by_id(encoders[i]).x(encoderXs[i]);
 		}
 	}
 	
@@ -33,8 +35,8 @@ class SeedGenerator {
 		seed *= 527;
 		puts("seed is " + seed);
 		for (uint i = 0; i < encoders.size(); i++) {
-			float newpos = encoderXs[i];
-			newpos += seed / (1 << (i*8)) % 256 + 300;
+			int newpos = encoderXs[i];
+			newpos += (seed / (1 << (i*8))) % 256 + 300;
 			entity_by_id(encoders[i]).x(newpos);
 		}
 		return seed;

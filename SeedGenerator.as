@@ -1,7 +1,7 @@
 class SeedGenerator {
 
 	scene@ g;
-	uint seed;
+	uint seed, t;
 	
 	/* This array should stay at 4 entities. You can assign any entities to it
 	 * but I recommend using script entities (the scrolls at the bottom of the 
@@ -14,10 +14,28 @@ class SeedGenerator {
 	
 	SeedGenerator() {
 		@g = get_scene();
+		t = 0;
 	}
 	
-	/* Call this on level start before anything below regardless of replay or not.
+	/* Call this every step from the start of the level until at least
+	 * ready() returns true.
 	 */
+	void step() {
+		if (t == 0)
+			locateEncoders();
+		if (t == 10 && !is_replay())
+			generateSeed();
+		if (t == 20 && is_replay())
+			calculateSeed();
+		t++;
+	}
+	
+	/* Returns true if the seed is ready, false otherwise.
+	 */
+	bool ready() {
+		return t > 20;
+	}
+	
 	void locateEncoders() {
 		for (uint i = 0; i < encoders.size(); i++) {
 			encoderXs[i] = int(entity_by_id(encoders[i]).x());
@@ -25,11 +43,6 @@ class SeedGenerator {
 		}
 	}
 	
-	/* Call this a bit after level start if it's not a replay. I had success
-	 * calling it on frame 13 of the level but earlier might be possible.
-	 * The script entities chosen in the editor will be moves a certain amount
-	 * so that their location is logged in the replay.
-	 */
 	uint generateSeed() {
 		seed = uint32(timestamp_now());
 		seed *= 527;
@@ -42,11 +55,6 @@ class SeedGenerator {
 		return seed;
 	}
 	
-	/* Call this at least 10 frames later than generateSeed() if it is a replay. The 
-	 * replay tracks entities and will displace the encoders the same as they were 
-	 * when the level was originally played, and this function tracks that 
-	 * displacement and recreates the seed.
-	 */
 	uint calculateSeed() {
 		uint guess = 0;
 		for (uint i = 0; i < encoders.size(); i++) {

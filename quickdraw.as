@@ -4,7 +4,7 @@ class script : callback_base {
 	scene@ g;
 	dustman@ player;
 	camera@ cam;
-	[text] SeedGenerator s;
+	SeedGenerator s;
 	bool seed_set;
 	
 	[position, mode:WORLD, layer:19, y:cam_y]

@@ -3,13 +3,10 @@ class SeedGenerator {
 	scene@ g;
 	uint seed, t;
 	
-	/* This array should stay at 4 entities. You can assign any entities to it
-	 * but I recommend using script entities (the scrolls at the bottom of the 
-	 * entity menu). You must also declare your SeedGenerator with [text].
-	 * These entities MUST be close to where the player spawns.
+	/* You should no longer need to use [text] when declaring
+	 * SeedGenerator, it creates the entities itself now.
 	 */
-	[entity] array<uint> encoders(4);
-	
+	array<uint> encoders(4);
 	array<int> encoderXs(4);
 	
 	SeedGenerator() {
@@ -37,9 +34,14 @@ class SeedGenerator {
 	}
 	
 	void locateEncoders() {
+		controllable@ player = @controller_controllable(0);
 		for (uint i = 0; i < encoders.size(); i++) {
-			encoderXs[i] = int(entity_by_id(encoders[i]).x());
-			entity_by_id(encoders[i]).x(encoderXs[i]);
+			scriptenemy@ temp = create_scriptenemy(ByteEncoder());
+			temp.x(int32(player.x()));
+			temp.y(int32(player.y()));
+			g.add_entity(@temp.as_entity());
+			encoders[i] = temp.id();
+			encoderXs[i] = int32(entity_by_id(encoders[i]).x());
 		}
 	}
 	

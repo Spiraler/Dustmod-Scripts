@@ -24,6 +24,8 @@ class SeedGenerator {
 			generateSeed();
 		if (t == 20 && is_replay())
 			calculateSeed();
+		if (t == 21)
+			deleteEncoders();
 		t++;
 	}
 	
@@ -66,6 +68,12 @@ class SeedGenerator {
 		puts("I think the seed was " + guess);
 		seed = guess;
 		return guess;
+	}
+	
+	void deleteEncoders() {
+		for (uint i = 0; i < encoders.size(); i++) {
+			g.remove_entity(entity_by_id(encoders[i]));
+		}
 	}
 	
 	uint getSeed() {

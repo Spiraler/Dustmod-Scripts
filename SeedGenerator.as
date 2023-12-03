@@ -32,7 +32,7 @@ class SeedGenerator {
 	/* Returns true if the seed is ready, false otherwise.
 	 */
 	bool ready() {
-		return t > 20;
+		return t > 21;
 	}
 	
 	void locateEncoders() {

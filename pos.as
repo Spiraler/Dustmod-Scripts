@@ -16,3 +16,22 @@ class pos {
 	}
 	
 }
+
+class posHud {
+	
+	[position,mode:hud,y:Y] float X;
+	[hidden] float Y;
+	
+	posHud() {
+		
+	}
+	
+	float x() {
+		return X;
+	}
+	
+	float y() {
+		return Y;
+	}
+	
+}

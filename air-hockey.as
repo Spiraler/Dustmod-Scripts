@@ -116,11 +116,13 @@ class script : callback_base {
 		p1lx = p1x;
 		p1ly = p1y;
 		p1x = g.mouse_x_hud(0);
+		p1x -= p1x % 1;
 		if (p1x > -1 * radius)
 			p1x = -1 * radius;
 		if (p1x < topleft.x() + radius)
 			p1x = topleft.x() + radius;
 		p1y = g.mouse_y_hud(0);
+		p1y -= p1y % 1;
 		if (p1y > botright.y() - radius)
 			p1y = botright.y() - radius;
 		if (p1y < topleft.y() + radius)
@@ -129,11 +131,13 @@ class script : callback_base {
 			p2lx = p2x;
 			p2ly = p2y;
 			p2x = g.mouse_x_hud(1);
+			p2x -= p2x % 1;
 			if (p2x < radius)
 				p2x = radius;
 			if (p2x > botright.x() - radius)
 				p2x = botright.x() - radius;
 			p2y = g.mouse_y_hud(1);
+			p2y -= p2y % 1;
 			if (p2y > botright.y() - radius)
 				p2y = botright.y() - radius;
 			if (p2y < topleft.y() + radius)
@@ -227,6 +231,16 @@ class script : callback_base {
 		
 		can.draw_text(scoreText1, -60, 370, 1, 1, 0);
 		can.draw_text(scoreText2, 60, 370, 1, 1, 0);
+	}
+	
+	void editor_draw(float subframe) {
+		/*drawing::fill_circle(g, 12, 2, -200, 100, 48, 26, 0xFFFF0000, 0xFFBB0000, false, 1);
+		drawing::fill_circle(g, 12, 2, 200, -50, 48, 26, 0xFF0000FF, 0xFF0000BB, false, 1);
+		
+		drawing::fill_circle(g, 12, 3, -200, 100, 20, 26, 0xFFCC0000, 0xFFAA0000, false, 1);
+		drawing::fill_circle(g, 12, 3, 200, -50, 20, 26, 0xFF0000CC, 0xFF0000AA, false, 1);
+		
+		drawing::fill_circle(g, 12, 1, 50, -100, 31, 25, 0xFFFF9900, 0xFFCC8800, false, 1);*/
 	}
 
 }

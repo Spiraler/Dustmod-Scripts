@@ -9,10 +9,10 @@ const string EMBED_frylock = "frylock.png";
 class script : callback_base {
 
 	scene@ g;
-	Sprite shake = Sprite("script", "shake", 0.5, 1);
-	Sprite phone = Sprite("script", "phone", 0.5, 1);
-	Sprite meatwad = Sprite("script", "meatwad", 0.5, 1);
-	Sprite frylock = Sprite("script", "frylock", 0.5, 1);
+	Sprite shake;
+	Sprite phone;
+	Sprite meatwad;
+	Sprite frylock;
 	float sx, sy;
 	float px, py;
 	float mx, my;
@@ -22,17 +22,6 @@ class script : callback_base {
 	
 	script() {
 		@g = get_scene();
-		
-		sx = -625;
-		sy = -100;
-		px = 625;
-		py = -100;
-		mx = -625;
-		my = 350;
-		fx = 625;
-		fy = 400;
-		t = rot = 0;
-		
 	}
 	
 	void on_level_start() {
@@ -43,6 +32,21 @@ class script : callback_base {
 		g.override_sound("sfx_impact_light_1", "chirp", true);
 		g.override_sound("sfx_impact_light_2", "chirp", true);
 		g.override_sound("sfx_impact_light_3", "chirp", true);
+		
+		shake = Sprite("script", "shake", 0.5, 1);
+		phone = Sprite("script", "phone", 0.5, 1);
+		meatwad = Sprite("script", "meatwad", 0.5, 1);
+		frylock = Sprite("script", "frylock", 0.5, 1);
+		
+		sx = -625;
+		sy = -100;
+		px = 625;
+		py = -100;
+		mx = -625;
+		my = 350;
+		fx = 625;
+		fy = 400;
+		t = rot = 0;
 	}
 	
 	void step(int entities) {

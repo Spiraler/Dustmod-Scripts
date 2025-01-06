@@ -74,7 +74,7 @@ class script : callback_base {
   void step(int entities) {
 	if (endTimer >= 0) {
 		if (endTimer == 0) {
-			g.end_level(0, 0);
+			g.end_level(0, -500);
 		}
 		endTimer--;
 	}
